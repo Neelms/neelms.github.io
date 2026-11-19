@@ -145,19 +145,19 @@ footer{padding:40px 0 60px;color:var(--muted);font-size:14px}
       <h3>What I did</h3>
       <ul>
         <li>Matched depth, color, and pose streams by timestamp, then back-projected each depth pixel with the pinhole camera model and transformed the points into the world frame.</li>
-        <li>Fused a full TUM RGB-D sequence into one colored point cloud and downsampled it with 1.25 cm voxels.</li>
+        <li>Fused full TUM RGB-D sequences into colored point clouds and downsampled it with 1.25 cm voxels.</li>
         <li>Benchmarked two learned depth models, Depth Anything V2 and Apple Depth Pro, against sensor depth on 50 frames.</li>
       </ul>
       <h3>Next</h3>
       <p>Build the map from camera images alone with predicted depth, then add SAM and CLIP semantics and real SLAM poses.</p>
       <div class="stats">
-        <div class="stat"><b>17.0M → 344k</b><span>points after fusion (49× fewer)</span></div>
-        <div class="stat"><b>18 s</b><span>to fuse the full sequence</span></div>
+        <div class="stat"><b>17.0M → 344k</b><span>points after fusion on fr1_xyz (49× fewer)</span></div>
+        <div class="stat"><b>18 s</b><span>to fuse the fr1_xyz sequence</span></div>
         <div class="stat"><b>0.031 AbsRel</b><span>best learned-depth error vs. sensor</span></div>
       </div>
     </div>
     <div class="media">
-      <figure><video src="assets/video/room_flythrough.mp4" poster="assets/img/room.jpg" autoplay muted loop playsinline></video><figcaption>Fly-through of a room my mapper fused from a TUM RGB-D sequence</figcaption></figure>
+      <figure><video src="assets/video/room_flythrough.mp4" poster="assets/img/room.jpg" autoplay muted loop playsinline></video><figcaption>Fly-through of the TUM fr3_long_office_household room, fused by my mapper</figcaption></figure>
     </div>
   </div>
 </div></section>
