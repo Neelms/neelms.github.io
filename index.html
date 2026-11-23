@@ -32,7 +32,7 @@ header.hero{background:var(--hero);border-bottom:1px solid var(--line)}
 .hero .links{display:flex;gap:10px;flex-wrap:wrap}
 .btn{display:inline-block;padding:9px 16px;border-radius:8px;border:1px solid var(--line);text-decoration:none;color:var(--ink);font-weight:500;font-size:14px;background:var(--bg)}
 .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
-.hero img{width:100%;border-radius:12px;background:#fff}
+.hero img,.hero video{display:block;width:100%;border-radius:12px;background:#fff}
 nav.toc{border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:5}
 nav.toc .wrap{display:flex;gap:18px;overflow-x:auto;padding-top:12px;padding-bottom:12px;font-size:14px;white-space:nowrap}
 nav.toc a{color:var(--muted);text-decoration:none}
@@ -87,7 +87,8 @@ footer{padding:40px 0 60px;color:var(--muted);font-size:14px}
         <a class="btn" href="mailto:nxm590@case.edu">nxm590@case.edu</a>
       </div>
     </div>
-    <img src="assets/img/ptero_model.jpg" alt="CAD model of a pterosaur-inspired robot">
+    <video id="reel" src="assets/video/hero_reel.mp4" poster="assets/img/hero_reel_poster.jpg" autoplay muted loop playsinline
+      aria-label="Clips from each project: worm robot swimming, fused 3D room map, Baja steering rack, RC car steering, expandable cup holder, pterosaur flapping mechanism"></video>
   </div>
 </header>
 
@@ -245,6 +246,7 @@ footer{padding:40px 0 60px;color:var(--muted);font-size:14px}
       </div>
     </div>
     <div class="media two">
+      <figure class="span"><video src="assets/video/worm_swim.mp4" poster="assets/img/worm_swim.jpg" autoplay muted loop playsinline></video><figcaption>The worm robot swimming</figcaption></figure>
       <figure class="span"><div class="embed"><iframe src="https://drive.google.com/file/d/1hCh5bndvHyuUqvFCsZ8rVMnJZ1EU9xNC/preview" allow="autoplay" loading="lazy" title="Demo segment in motion"></iframe></div><figcaption>The working demo segment I built and wired, in motion</figcaption></figure>
       <figure class="span"><img src="assets/img/worm_level.jpg" alt="Worm robot hanging off a ledge"><figcaption>Head-leveling test with segments hanging off a ledge</figcaption></figure>
       <figure><img src="assets/img/worm_droop.jpg" alt="Droop comparison"><figcaption>Droop with three segments off the ledge, tracked in video</figcaption></figure>
@@ -333,5 +335,11 @@ footer{padding:40px 0 60px;color:var(--muted);font-size:14px}
 </main>
 
 <footer><div class="wrap">Neel Mani Sulkunte · <a href="mailto:nxm590@case.edu">nxm590@case.edu</a> · <a href="https://github.com/Neelms">github.com/Neelms</a></div></footer>
+<script>
+// Respect reduced-motion: show the poster frame instead of autoplaying video.
+if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('video[autoplay]').forEach(v => { v.removeAttribute('autoplay'); v.pause(); v.controls = true; });
+}
+</script>
 </body>
 </html>
