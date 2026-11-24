@@ -250,7 +250,8 @@ footer{padding:40px 0 60px;color:var(--muted);font-size:14px}
     <div class="media two">
       <figure class="span"><video src="assets/video/worm_swim.mp4" poster="assets/img/worm_swim.jpg" autoplay muted loop playsinline></video><figcaption>The worm robot swimming</figcaption></figure>
       <figure class="span"><div class="embed"><iframe src="https://drive.google.com/file/d/1hCh5bndvHyuUqvFCsZ8rVMnJZ1EU9xNC/preview" allow="autoplay" loading="lazy" title="Demo segment in motion"></iframe></div><figcaption>The working demo segment I built and wired, in motion</figcaption></figure>
-      <figure class="span"><img src="assets/img/worm_level.jpg" alt="Worm robot hanging off a ledge"><figcaption>Head-leveling test with segments hanging off a ledge</figcaption></figure>
+      <figure><video src="assets/video/worm_headlift.mp4" poster="assets/img/worm_headlift.jpg" autoplay muted loop playsinline></video><figcaption>Head-lift and leveling test: how high the head rises and how level it stays</figcaption></figure>
+      <figure><img src="assets/img/worm_level.jpg" alt="Worm robot hanging off a ledge"><figcaption>Head-leveling test with segments hanging off a ledge</figcaption></figure>
       <figure><img src="assets/img/worm_droop.jpg" alt="Droop comparison"><figcaption>Droop with three segments off the ledge, tracked in video</figcaption></figure>
       <figure><img src="assets/img/worm_plots.jpg" alt="Tracker plots"><figcaption>Tip position over time from Tracker</figcaption></figure>
       <figure><img src="assets/img/worm_imu.jpg" alt="Camera holder"><figcaption>Camera holder</figcaption></figure>
@@ -269,9 +270,11 @@ footer{padding:40px 0 60px;color:var(--muted);font-size:14px}
       <p>A high-RPM cell filtration chamber needed precise speed profiles: duty cycling, sine waves, and gentle ramps to protect the cells and the magnetic torque coupling. As cells moved outward during spin-up, the chamber's inertia changed. Open-loop control worked on day one but couldn't hold those profiles.</p>
       <h3>What I did</h3>
       <ul>
-        <li>Taught myself encoder decoding, filtering, and PID control, then built the loop from scratch on an Arduino, motor driver, and BLDC motor.</li>
+        <li>Taught myself encoder decoding, filtering, and PID control, then built the loop from scratch on an Arduino, motor driver, and brushed DC motor.</li>
         <li>Decoded the Hall-effect quadrature encoder into live shaft position and speed.</li>
-        <li>Added a first-order Butterworth filter and wrote a custom PID loop.</li>
+        <li>Added a first-order Butterworth filter with sliding-window smoothing and wrote a custom PID loop.</li>
+        <li>Wrote ramp-up and ramp-down functions so the magnetic coupling could get the chamber up to speed without decoupling mid-spin.</li>
+        <li>Designed the motor base for injection molding, with draft on the part.</li>
         <li>Debugged the encoder signal and circuit on an oscilloscope, and tested against my own duty-cycle, sine, and ramp profiles until it tracked them smoothly without retuning.</li>
       </ul>
       <div class="stats">
@@ -279,8 +282,8 @@ footer{padding:40px 0 60px;color:var(--muted);font-size:14px}
         <div class="stat"><b>Still in use</b><span>a senior engineer designed the chamber around it</span></div>
       </div>
     </div>
-    <div class="media">
-      <figure><div class="diagram">
+    <div class="media two">
+      <figure class="span"><div class="diagram">
         <svg viewBox="0 0 560 300" width="100%" font-family="Inter, sans-serif" font-size="12" role="img" aria-label="Control loop diagram">
           <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1f4fd1"/></marker></defs>
           <g fill="#fff" stroke="#c7cdd8" stroke-width="1.2">
@@ -296,7 +299,7 @@ footer{padding:40px 0 60px;color:var(--muted);font-size:14px}
             <text x="60" y="65">Speed</text><text x="60" y="81">profile</text>
             <text x="200" y="65">PID</text><text x="200" y="81">controller</text>
             <text x="345" y="65">Motor</text><text x="345" y="81">driver</text>
-            <text x="495" y="65">BLDC motor</text><text x="495" y="81">+ chamber</text>
+            <text x="495" y="65">DC motor</text><text x="495" y="81">+ chamber</text>
             <text x="495" y="225">Hall-effect</text><text x="495" y="241">encoder</text>
             <text x="345" y="225">Quadrature</text><text x="345" y="241">decoding</text>
             <text x="200" y="225">Butterworth</text><text x="200" y="241">filter</text>
@@ -313,6 +316,9 @@ footer{padding:40px 0 60px;color:var(--muted);font-size:14px}
           <text x="280" y="290" fill="#5b6270" font-size="11" text-anchor="middle">Blue: parts I wrote from scratch</text>
         </svg>
       </div><figcaption>The control loop I built</figcaption></figure>
+      <figure class="span"><img src="assets/img/smc_filter.jpg" alt="Raw versus filtered encoder speed signal"><figcaption>Raw encoder speed (gray) vs. my filtered signal (orange)</figcaption></figure>
+      <figure class="span"><video src="assets/video/smc_scope.mp4" poster="assets/img/smc_scope.jpg" autoplay muted loop playsinline></video><figcaption>Motor test rig: Arduino reading the Hall encoder, with its output on the scope</figcaption></figure>
+      <figure class="span"><video src="assets/video/smc_chamber.mp4" poster="assets/img/smc_chamber.jpg" autoplay muted loop playsinline style="max-height:560px;object-fit:contain;background:#16191f"></video><figcaption>Final prototype spinning under my speed control (chamber and coupling designed by others)</figcaption></figure>
     </div>
   </div>
 </div></section>
